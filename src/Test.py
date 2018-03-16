@@ -4,12 +4,11 @@ import io
 import csv
 import os
 from apiclient import discovery
-from googleapiclient.http import MediaIoBaseDownload
+from googleapiclient.http import MediaIoBaseDownload ,MediaFileUpload
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
-from apiclient import http as httplib
-import shutil
+
 
 try:
     import argparse
@@ -63,7 +62,6 @@ def main():
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
     service = discovery.build('drive', 'v3', http=http)
-
     results = service.files().list(
         pageSize=10, q="mimeType='application/vnd.google-apps.folder' and name = 'TestFolder'").execute()
     items = results.get('files', [])
@@ -77,6 +75,7 @@ def main():
 
         ).execute()
         #print(childDocuments)
+
         for file in childDocuments.get('files', []):
             request = service.files().get_media(fileId=file['id'])
             fh = io.FileIO('F:/lol/'+file['name'], 'wb')
@@ -84,7 +83,21 @@ def main():
             done = False
             while done is False:
                 status, done = downloader.next_chunk()
-                print ("Download %d%%." % int(status.progress() * 100))
+            print ("Download %d%%." % int(status.progress() * 100))
+
+    file_metadata = {
+        'name': 'lol.png',
+        'parents': [folder_id]
+     }
+    media = MediaFileUpload('F:/lol.jpeg',
+                            mimetype='image/jpeg',
+                            resumable=True)
+    file = service.files().create(body=file_metadata,
+                                        media_body=media,
+                                        fields='id').execute()
+    print ('File ID: %s' % file.get('id'))
+
+
 
 
 

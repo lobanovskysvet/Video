@@ -15,8 +15,8 @@ class StringBuilder:
     def __init__(self):
         self._file_str = StringIO()
 
-    def append(self, str):
-        self._file_str.write(str)
+    def append(self, string):
+        self._file_str.write(string)
 
     def __str__(self):
         return self._file_str.getvalue()
@@ -55,23 +55,36 @@ def process_predicate_query(predicate_items, condition="and"):
     else:
         string_builder = StringBuilder()
         for predicate_item in predicate_items:
-            cond = condition
             string_builder.append(("%s %s " % (predicate_item.__str__(), condition)))
     return string_builder.__str__()[: -(2 + len(condition))]
 
 
-# Todo add comments
 def get_file_name_from_tuple(file_metadata_tuple):
+    """
+    Reads file name with extension from file_metadata_tuple(file_path, mime_type)
+    :param file_metadata_tuple: tuple(file_path, mime_type)
+    :return: name of the file with extension
+    """
     return file_metadata_tuple[0].split("/")[-1]
 
 
 def process_cmd_args():
+    """
+    Reads CMD args.
+    At least 4 arguments should be passed to main script.
+    1. logo_file_name: name with extension that exists on the remote Drive
+    2. destination_folder_name: name of the folder on the remote Drive that would be used as a destination folder
+    3. local_temp_folder: full path to local storage that would be used for temporary file storing
+    4. source_folder_name: name of the folder (can be specified any amount)
+        on the remote Drive that would be used as a source folder
+
+    :return: tuple(logo_file_name, destination_folder_name, local_temp_folder, source_folder_name)
+    """
     if len(sys.argv) < 4:
         print(
             "Not enough cmd arguments. You must specify 'LogoFileName.ext', "
             "'DestinationFolderName', 'PathToLocalTempFolder','SourceFolderName'(any amount).")
 
-    # Todo extract loading of args to function
     system_args = iter(sys.argv)
     system_args.__next__()
     logo_file_name = system_args.__next__()
@@ -88,10 +101,19 @@ def process_cmd_args():
 
 
 def create_folder(folder_name):
+    """
+    Creates folder if not it does not exists
+    :param folder_name: full folder path
+    """
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
 
 
 def drop_folder(folder_name):
+    """
+    Removes folder if not it does not exists
+    :param folder_name: full folder path
+    :return:
+    """
     if os.path.exists(folder_name):
         shutil.rmtree(folder_name, ignore_errors=True)

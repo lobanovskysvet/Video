@@ -31,19 +31,30 @@ CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Drive API Python Quickstart'
 
 
-# Todo add comments
 def get_item_metadata_from_drive(service, predicate_list, item_count=100):
+    """
+    Reads items metadata from remote Drive
+    :param service: facade for Drive API interactions
+    :param predicate_list: list of the restrictions which would be applied to the query (part of the Drive API).
+     Query provides availability to filter out result set of the items from remote Drive
+    :param item_count: max count of the items that we expect in the one result set
+    :return: file metadata, that contains such fields: mime type, file name, file id, etc...
+    """
     query = process_predicate_query(predicate_list)
     files_metadata = service.files() \
         .list(pageSize=item_count, q=query) \
         .execute() \
         .get(FILES_FIELD_NAME, [])
-    print("Files found: %d" % len(files_metadata))
     return files_metadata
 
 
-# Todo add comments
 def get_folder_metadata(service, folder_name):
+    """
+    Reads specific folder metadata
+    :param service: facade for Drive API interactions
+    :param folder_name: name of the folder, that would be searched in the remote Drive
+    :return: folder metadata
+    """
     root_folder_predicate_list = [
         PredicateMetadata(MIME_TYPE_FIELD_NAME, "=", FOLDER_MIME_TYPE),
         PredicateMetadata(NAME_FIELD_NAME, "=", folder_name)
@@ -51,8 +62,15 @@ def get_folder_metadata(service, folder_name):
     return get_item_metadata_from_drive(service, root_folder_predicate_list)[0]
 
 
-# Todo add comments
 def upload_file(service, file_path, file_name, mime_type, parent_id=None):
+    """
+    Uploads file to the remote storage with specific parent folder, mime type and name
+    :param service: facade for Drive API interactions
+    :param file_path: path to the file on the local storage that would be uploaded
+    :param file_name: name with which file would be saved on the remote Drive
+    :param mime_type: mime type of the file (video/mp4, image/jpg, etc.)
+    :param parent_id: id of the parent folder
+    """
     file_metadata = {
         'name': [file_name],
         'parents': [parent_id]
@@ -66,8 +84,14 @@ def upload_file(service, file_path, file_name, mime_type, parent_id=None):
     print('File %s was uploaded' % file_name)
 
 
-# Todo add comments
 def download_file(service, file_metadata, destination_folder="/"):
+    """
+    Downloads specific file from remote Drive. File specification is stored in the file_metadata
+    :param service: facade for Drive API interactions
+    :param file_metadata: holds information about particular item from the remote Drive
+    :param destination_folder: local folder that would be used as the tepm storage
+    :return: tuple(full file path on the local storage, mime type)
+    """
     request = service.files().get_media(fileId=file_metadata[ID_FIELD_NAME])
     file_full_path = destination_folder + file_metadata[NAME_FIELD_NAME]
     fh = io.FileIO(file_full_path, 'wb')
@@ -86,20 +110,19 @@ def load_service():
     Selected driver version: V3
     Credentials are loaded from get_credentials() function
     """
-
     credentials = _get_credentials()
     http = credentials.authorize(httplib2.Http())
     return discovery.build('drive', 'v3', http=http)
 
 
 def _get_credentials():
-    """Gets valid user credentials from storage.
+    """
+    Gets valid user credentials from storage.
 
     If nothing has been stored, or if the stored credentials are invalid,
     the OAuth2 flow is completed to obtain the new credentials.
 
-    Returns:
-        Credentials, the obtained credential.
+    :return: credentials, the obtained credential.
     """
     home_dir = os.path.expanduser('~')
     credential_dir = os.path.join(home_dir, '.credentials')

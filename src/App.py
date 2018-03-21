@@ -12,11 +12,21 @@ import DriveApiUtil
 from Util import *
 
 
-
 def main():
     # Loads values passed from CMD
     logo_file_name, destination_folder_name, local_temp_folder_path, source_folder_name_list = process_cmd_args()
 
+    start(logo_file_name, destination_folder_name, local_temp_folder_path, source_folder_name_list)
+
+
+def start(logo_file_name, destination_folder_name, local_temp_folder_path, source_folder_name_list):
+    """
+    Starts the script.
+    :param logo_file_name: name with extension of logo file
+    :param destination_folder_name: name of the destination folder on the remote Drive
+    :param local_temp_folder_path: path to local storage
+    :param source_folder_name_list: list of folders, where files would be searched
+    """
     # Initializes service for DriveApi interactions
     service = DriveApiUtil.load_service()
 
@@ -37,9 +47,13 @@ def main():
     # Gets all file metadatas from remote Drive storage
     file_metadata_list = _get_all_files_metadata(service, source_folder_metadata_list)
 
-    # Downloads files from Drive and return tuple(path_in_local_storage, mime_type).
+    # Filter out only videos and logo
+    video_list = [i for i in file_metadata_list
+                  if i[DriveApiUtil.MIME_TYPE_FIELD_NAME].startswith("video/")
+                  or i[DriveApiUtil.NAME_FIELD_NAME] == logo_file_name]
+    # Downloads files (only videos and one logo) from Drive and return tuple(path_in_local_storage, mime_type).
     # Downloading is executed in the different threads.
-    file_path_and_mime_type_tuple_list = download_file_and_get_path_and_mime_type_tuple_list(file_metadata_list,
+    file_path_and_mime_type_tuple_list = download_file_and_get_path_and_mime_type_tuple_list(video_list,
                                                                                              local_temp_folder_path)
     # Gets logo file path in the local storage
     logo_file_path = _get_logo_file_path(file_path_and_mime_type_tuple_list, logo_file_name)

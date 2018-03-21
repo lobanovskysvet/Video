@@ -2,6 +2,7 @@ from __future__ import print_function
 
 import io
 import os
+from argparse import Namespace
 
 import httplib2
 from apiclient import discovery
@@ -136,9 +137,7 @@ def _get_credentials():
     if not credentials or credentials.invalid:
         flow = client.flow_from_clientsecrets(CLIENT_SECRET_FILE, SCOPES)
         flow.user_agent = APPLICATION_NAME
-        if flags:
-            credentials = tools.run_flow(flow, store, flags)
-        else:  # Needed only for compatibility with Python 2.6
-            credentials = tools.run(flow, store)
+        flags = Namespace(auth_host_name='localhost', auth_host_port=[8090,8080], logging_level='ERROR',noauth_local_webserver=False)
+        credentials = tools.run_flow(flow, store, flags)
         print('Storing credentials to ' + credential_path)
     return credentials

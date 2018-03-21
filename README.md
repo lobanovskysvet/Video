@@ -1,6 +1,6 @@
 # **General information**
-This script is designed to solve the problem of automated video conversion, which is stored on the remote Drive
-To accomplish this task, the following logical blocks were implemented: read arguments from the CMD, multithreaded upload/download of the corresponding files to a temporary folder, multithreaded video conversion, that applies particular logo image on as a watermark for first 10 seconds
+This script is  intended to solve the task of automated video conversion, which is stored on the remote Drive.
+To accomplish this task, the following logical blocks were implemented: read arguments from the CMD, multithreaded upload/download of the corresponding files to a temporary folder, multithreaded video conversion, that applies particular logo image on as a watermark for first 10 seconds.
 # **Required libs**
 The following libraries will be installed :
   * moviePy

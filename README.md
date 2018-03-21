@@ -12,7 +12,18 @@ Use pip  to manage your installation
   * Python 3.6 or greater.
   * The pip package management tool.
   * A Google account with Google Drive enabled.
-### **Step 1: Turn on the Drive API**
+
+### **Step 1: Install the Google Client Library**
+   Run the following command to install the library using pip:
+     
+   *pip install --upgrade google-api-python-client*
+   
+### **Step 2: Install the MoviePy Library**
+   Run the following command to install the library using pip:
+   
+   *pip install moviepy*
+ 
+### **Step 3: Turn on the Drive API**
   1. Use this wizard to create or select a project in the Google Developers Console and automatically turn on the API. Click Continue, then Go to credentials.
   2. On the Add credentials to your project page, click the Cancel button.
   3. At the top of the page, select the OAuth consent screen tab. Select an Email address, enter a Product name if not already set, and click the Save button.
@@ -21,14 +32,9 @@ Use pip  to manage your installation
   6. Click OK to dismiss the resulting dialog.
   7. Click the file_download (Download JSON) button to the right of the client ID.
   8. Move this file to your working directory and rename it client_secret.json.
-### **Step 2: Install the Google Client Library**
-   Run the following command to install the library using pip:
+      
+# **Supported formats**
    
-   *pip install --upgrade google-api-python-client*
-   
-# **Restrictions of file formats**
-  Mime type of the file wint extension :
-  
   video: ***.mp4/.avi***
   
   image: ***.jpg/.png***

@@ -37,7 +37,7 @@ Use pip  to manage your installation
    
   video: ***.mp4/.avi***
   
-  image: ***.jpg/.png***
+  image: ***.png***
 
 # **Args for startup**
 ***BoseLogo.png*** ***ResultFolder*** ***F:/temp/*** ***assets*** ***input***

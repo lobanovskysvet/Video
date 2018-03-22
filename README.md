@@ -31,25 +31,28 @@ Use pip  to manage your installation
   5. Select the application type **Other**, enter the name **"Drive API Quickstart"**, and click the **Create** button.
   6. Click **OK** to dismiss the resulting dialog.
   7. Click the **Download JSON** button to the right of the client ID.
-  8. Move this file to your working directory and rename it *client_secret.json*.
+  8. Move this file to your working directory (folder with script App.py) and rename it *client_secret.json*.
+  #### **Supported formats**
+   
+  * video: ***.mp4/.avi***
   
-  ### **Step 4: Run** 
+  * image: ***.png/.jpg***
 
+   #### **Args for startup**   
+   
+  ***BoseLogo.png*** ***ResultFolder*** ***F:/temp/*** ***assets*** ***input***
+  
+   1. ***BoseLogo.png***: name with extension that exists on the remote Drive.
+   2. ***ResultFolder***: name of the folder on the remote Drive that would be used as a destination folder (the folder should be exist on the remote Drive)
+   3. ***F:/temp/***  : full path to local storage that would be used for temporary file storing.
+   4. ***assets*** ***input***: name of the folder (can be specified any amount)on the remote Drive that would be used as a source folder (the folders should be exist on the remote Drive).
+  
+  #### **Step 4: Run** 
+   * Example : ~/App.py *BoseLogo.png* *ResultFolder* *F:/temp/* *assets* *input*
    * The script will attempt to open a new window or tab in your default browser.If you are not already logged into your Google account, you will be prompted to log in. If you are logged into multiple Google accounts, you will be asked to select one account to use for the authorization.
 
    * Click the **Accept** button.
    * The script will proceed automatically, and you may close the window/tab.
   
       
-# **Supported formats**
-   
-  video: ***.mp4/.avi***
-  
-  image: ***.png/.jpg***
 
-# **Args for startup**
-***BoseLogo.png*** ***ResultFolder*** ***F:/temp/*** ***assets*** ***input***
- 1. ***BoseLogo.png***: name with extension that exists on the remote Drive.
- 2. ***ResultFolder***: name of the folder on the remote Drive that would be used as a destination folder (the folder should be exist on the remote Drive)
- 3.  ***F:/temp/***  : full path to local storage that would be used for temporary file storing.
- 4. ***assets*** ***input***: name of the folder (can be specified any amount)on the remote Drive that would be used as a source folder (the folders should be exist on the remote Drive).

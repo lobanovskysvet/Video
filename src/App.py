@@ -230,7 +230,7 @@ def get_centered_coordinates(images, size):
         x_position = (size[0] - new_image.size[0]) / 2
         y_position = (size[1] - new_image.size[1]) / 2
 
-    return int(new_image.size[0] + x_position), int(new_image.size[1] + y_position)
+    return int(new_image.size[0] + x_position), int(new_image.size[1] + y_position), scale_data
 
 
 def _get_prepared_image_for_video(name_logo, width, height, start_time, end_time):
@@ -251,9 +251,9 @@ def _get_prepared_image_for_video(name_logo, width, height, start_time, end_time
     if w == h:
         new_logo = logo.set_position(("right", "bottom")).set_start(start_time).set_duration(end_time).resize(0.2)
     else:
-        x, y = get_centered_coordinates(images, size)
+        x, y, scale_data = get_centered_coordinates(images, size)
         new_logo = logo.set_position((width - x, height - y)).set_start(start_time).set_duration(end_time).resize(
-            scale(w, h, size[0], size[1]))
+            scale_data)
     return new_logo
 
 

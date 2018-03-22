@@ -49,7 +49,7 @@ Use pip  to manage your installation
 
 # **Args for startup**
 ***BoseLogo.png*** ***ResultFolder*** ***F:/temp/*** ***assets*** ***input***
- 1. ***BoseLogo.png***: name with extension that exists on the remote Drive
- 2. ***ResultFolder***: name of the folder on the remote Drive that would be used as a destination folder
- 3.  ***F:/temp/***  : full path to local storage that would be used for temporary file storing
- 4. ***assets*** ***input***: name of the folder (can be specified any amount)on the remote Drive that would be used as a source folder
+ 1. ***BoseLogo.png***: name with extension that exists on the remote Drive.
+ 2. ***ResultFolder***: name of the folder on the remote Drive that would be used as a destination folder (the folder should be exist on the remote Drive)
+ 3.  ***F:/temp/***  : full path to local storage that would be used for temporary file storing.
+ 4. ***assets*** ***input***: name of the folder (can be specified any amount)on the remote Drive that would be used as a source folder (the folders should be exist on the remote Drive).

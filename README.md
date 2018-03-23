@@ -31,7 +31,7 @@ Use pip  to manage your installation
   5. Select the application type **Other**, enter the name **"Drive API Quickstart"**, and click the **Create** button.
   6. Click **OK** to dismiss the resulting dialog.
   7. Click the **Download JSON** button to the right of the client ID.
-  8. Move this file to your working directory (folder with script App.py) and rename it *client_secret.json*.
+  8. Move this file to your working directory (project folder) and rename it *client_secret.json*.
   #### **Supported formats**
    
   * video: ***.mp4/.avi***
@@ -48,7 +48,7 @@ Use pip  to manage your installation
    4. ***assets*** ***input***: name of the folder (can be specified any amount)on the remote Drive that would be used as a source folder (the folders should be exist on the remote Drive).
   
   #### **Step 4: Run** 
-   * Example : ~/App.py *BoseLogo.png* *ResultFolder* *F:/temp/* *assets* *input*
+   * Example : python App.py *BoseLogo.png* *ResultFolder* *F:/temp/* *assets* *input*
    * The script will attempt to open a new window or tab in your default browser.If you are not already logged into your Google account, you will be prompted to log in. If you are logged into multiple Google accounts, you will be asked to select one account to use for the authorization.
 
    * Click the **Accept** button.
